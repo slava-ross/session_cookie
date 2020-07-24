@@ -1,45 +1,28 @@
 <?php
-    header('Content-Type: text/html; charset=utf-8');
-    session_start();
-    print_r($_COOKIE);
 
-    if (!isset($_COOKIE['currentPage']))
-    {
-        echo "auth";
-    }
-    elseif ($_COOKIE['currentPage'] === 'page_a') {
+    if (empty($_SESSION['auth'])) {
+        if (!empty($_COOKIE['user_login']) and !empty($_COOKIE['user_password'])) {
+            $userLogin = $_COOKIE['user_login']; 
+            $userPassword = $_COOKIE['user_password'];
+            $redirectPage = $_COOKIE['current_page'];
+            
+            session_start(); 
+            $_SESSION['auth'] = true; 
+        }
+        else {
+            $redirectPage = '/auth.php';
 
-    }
-    else
-    {
-
-    }
-
-    switch ($user_type){
-      case "subscriber": $redirect_url = "/blog.html";
-        break;
-      case "author": $redirect_url = "/page_a.html";
-        break;
-      case "admin": $redirect_url = "/admin-panel.html";
-        break;
-      default: $redirect_url = "/registration-form.html";
+        }
+        header('HTTP/1.1 200 OK');
+        header('Location: http://' . $_SERVER['HTTP_HOST'] . $redirectPage);
+        exit();
     }
 
-    header('HTTP/1.1 200 OK');
-    header('Location: http://'.$_SERVER['HTTP_HOST'].$redirect_url);
-    exit();
+setcookie("user_login", $userLogin, strtotime("+30 days"));
+setcookie("user_password", $userPassword, strtotime("+30 days"));
 
-
-$redirect_url = array (
-  "subscriber" => "/blog.html",
-  "author" => "/author-panel.html",
-  "admin" => "/admin-panel.html",
-  "newuser" => "/registration-form.html"
-);
-
-header('HTTP/1.1 200 OK');
-header('Location: http://'.$_SERVER['HTTP_HOST'].$redirect_url[$user_type]);
-exit();
-
+            $key = md5 ( uniqid() );
+                    setcookie("user_session", $key_session, time()+3600);
+                    $_COOKIE['user_session'] = $key_session;
 ?>
 

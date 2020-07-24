@@ -9,5 +9,7 @@
 		<main>
 			<h2>This is Page B.</h2>
 		</main>
+		<?php
+			setcookie('current_page', '/page_b', time()+360); 
 	</body>
 </html>
