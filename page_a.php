@@ -10,6 +10,7 @@
             <h2>This is Page A.</h2>
         </main>
         <?php
-            setcookie('current_page', '/page_a', time()+360); 
+            setcookie('current_page', '/page_a', time()+3600);
+        ?>
     </body>
 </html>

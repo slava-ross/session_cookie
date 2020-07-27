@@ -18,11 +18,10 @@
         exit();
     }
 
-setcookie("user_login", $userLogin, strtotime("+30 days"));
-setcookie("user_password", $userPassword, strtotime("+30 days"));
+//setcookie("user_login", $userLogin, strtotime("+30 days"));
+//setcookie("user_password", $userPassword, strtotime("+30 days"));
 
-            $key = md5 ( uniqid() );
-                    setcookie("user_session", $key_session, time()+3600);
-                    $_COOKIE['user_session'] = $key_session;
+//            $key = md5 ( uniqid() );
+//setcookie("user_session", $key_session, time()+3600);
+//$_COOKIE['user_session'] = $key_session;
 ?>
-
