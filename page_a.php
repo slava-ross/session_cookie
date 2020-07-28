@@ -1,3 +1,6 @@
+<?php
+    session_start();
+?>
 <!DOCTYPE html>
 <html lang="ru">
     <head>
@@ -8,9 +11,21 @@
     <body>
         <main>
             <h2>This is Page A.</h2>
+            <p>
+                <a href="/page_b.php">Go to Page B</a>
+            </p>
         </main>
         <?php
-            setcookie('current_page', '/page_a', time()+3600);
+            var_dump($_SESSION);
+            echo "<br>";
+            echo $_COOKIE['user_login'] ;
+            echo "<br>";
+            echo $_COOKIE['user_password'];
+            echo "<br>";
+            echo $_COOKIE['current_page'];
+            echo "<br>";
+            echo $_COOKIE['PHPSESSID'];
+            setcookie('current_page', '/page_a.php', time()+3600);
         ?>
     </body>
 </html>
