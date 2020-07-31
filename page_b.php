@@ -14,17 +14,11 @@
             <p>
                 <a href="/page_a.php">Go to Page A</a>
             </p>
+            <p>
+                <a href="/auth.php?logout=1">Exit</a>
+            </p>
         </main>
         <?php
-            var_dump($_SESSION);
-            echo "<br>";
-            echo $_COOKIE['user_login'] ;
-            echo "<br>";
-            echo $_COOKIE['user_password'];
-            echo "<br>";
-            echo $_COOKIE['current_page'];
-            echo "<br>";
-            echo $_COOKIE['PHPSESSID'];
             setcookie('current_page', '/page_b.php', time()+3600);
         ?>
     </body>

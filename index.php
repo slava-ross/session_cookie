@@ -1,6 +1,7 @@
 <?php
     session_start();
-    if (!empty($_SESSION['auth'])) {
+    // Переменная auth существует и равна true (сессия активна и пользователь прошёл аутентификацию), а также qookie текущей страницы не просрочена.
+    if (!empty($_SESSION['auth']) && !empty($_COOKIE['current_page'])) {
         $redirectPage = $_COOKIE['current_page'];
     }
     else {
