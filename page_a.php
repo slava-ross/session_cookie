@@ -1,5 +1,6 @@
 <?php
     session_start();
+    setcookie('current_page', '/page_a.php', time()+3600);
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -18,8 +19,5 @@
                 <a href="/auth.php?logout=1">Exit</a>
             </p>
         </main>
-        <?php
-            setcookie('current_page', '/page_a.php', time()+3600);
-        ?>
     </body>
 </html>

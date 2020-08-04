@@ -23,7 +23,8 @@
             if (empty($_COOKIE['user_login']) || $_COOKIE['user_login'] !== $login) {
                 if (!empty($_POST['remember'])) {
                     setcookie('user_login', $login, time()+3600);
-                    setcookie('user_password', password_hash($password, PASSWORD_DEFAULT), time()+3600);
+                    //setcookie('user_password', password_hash($password, PASSWORD_DEFAULT), time()+3600);
+                    setcookie('user_password', $password, time()+3600);
                 }
                 setcookie('current_page', DEFAULT_REDIRECT_PAGE, time()+3600);
                 $_SESSION['auth'] = true;
@@ -33,21 +34,25 @@
             } else {
                 /* Зарегистрированный пользователь
                  * Если qookie имени пользователя существует и соответствует логину - проверяем
-                 * хэш пароля для подтверждения аутентичности пользователя. Можно использовать
+                 * пароль //хэш пароля// для подтверждения аутентичности пользователя. Можно использовать
                  * информацию в файлах или базе данных.
                  */
-                /*if (password_verify($password, $_COOKIE['user_password'])) {
+                //if (password_verify($password, $_COOKIE['user_password'])) {
+                if ($password !== $_COOKIE['user_password']) {
                     $errors[] = "Неверный пароль!";
-                    //$_SESSION['auth'] = false;
-                } else {*/
+                    $_SESSION['auth'] = false;
+                } else {
                     $_SESSION['auth'] = true;
                     header('HTTP/1.1 200 OK');
                     header('Location: http://' . $_SERVER['HTTP_HOST'] . $_COOKIE['current_page']);
                     exit();
-                //}
+                }
             }
         }
     }
+
+?>
+<?php
     /*
      * Вызов был не при отправке формы - для совершения аутентификации или выхода.
      * Если в GET-запросе передан флаг выхода - завершение сессии и удаление пользовательской информации (qookies).
